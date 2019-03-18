@@ -13,8 +13,8 @@ public class PizzeriaAdminConsoleApp {
 		Pizza p6 = new Pizza(5,"SAV","La savoyarde",13.00);
 		Pizza p7 = new Pizza(6,"ORI","L'orientale",13.50);
 		Pizza p8 = new Pizza(7,"IND","L'indienne",14.00); 
-		Pizza[] pizza = {p1,p2,p3,p4,p5,p6,p7,p8};
-		int cpt = 7;
+		Pizza[] pizza = new Pizza[100];
+		pizza[0]=p1;pizza[1]=p2;pizza[2]=p3;pizza[3]=p4;pizza[4]=p5;pizza[5]=p6;pizza[6]=p7;pizza[7]=p8;
 		Scanner sc = new Scanner(System.in);
 		boolean on = true;
 		while (on == true) {
@@ -29,7 +29,6 @@ public class PizzeriaAdminConsoleApp {
 				affiche(pizza);
 				break;
 			case 2 :
-				cpt++;
 				System.out.println("Ajout d'une nouvelle pizza");
 				System.out.println("Veuillez saisir le code :");
 				String code = sc.nextLine();
@@ -39,7 +38,8 @@ public class PizzeriaAdminConsoleApp {
 				String prixstr = sc.nextLine();
 				double prix = Double.parseDouble(prixstr); 
 				Pizza nouv = new Pizza(code,nom, prix);
-				pizza[cpt]=nouv;
+				int idx =  premierNull(pizza);
+				pizza[idx]=nouv;
 				break;
 			case 3 :
 				System.out.println("Mise à jour d'une pizza");
@@ -66,6 +66,9 @@ public class PizzeriaAdminConsoleApp {
 			case 99:
 				on = false;
 				System.out.println("Au revoir \u2639");
+				break;
+			default:
+				System.out.println("Erreur votre choix n'est pas correct !");
 			}
 		}
 		sc.close();
@@ -73,7 +76,10 @@ public class PizzeriaAdminConsoleApp {
 	
 	public static void affiche(Pizza[] pizza) {
 		for(Pizza pi : pizza){
-			System.out.println(pi.getCode()+" -> "+pi.getLibelle()+"("+pi.getPrix()+" €"+")"); 
+			if( pi != null) {
+				System.out.println(pi.getCode()+" -> "+pi.getLibelle()+"("+pi.getPrix()+" €"+")"); 
+			}
+			
 		}
 	}
 	
@@ -81,6 +87,15 @@ public class PizzeriaAdminConsoleApp {
 		for(int i = 0; i<pizza.length;i++) {
 			if(pizza[i] != null && pizza[i].getCode().equals(code)) {
 				return i;
+			}
+		}
+		return -1;
+	}
+	
+	public static int premierNull(Pizza [] pizza) {
+		for(int i = 0; i<pizza.length;i++) {
+			if(pizza[i] == null) {
+				 return i;
 			}
 		}
 		return -1;
