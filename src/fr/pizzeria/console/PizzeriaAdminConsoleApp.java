@@ -74,16 +74,15 @@ public class PizzeriaAdminConsoleApp {
 		sc.close();
 	}
 	
-	public static void affiche(Pizza[] pizza) {
+	private static void affiche(Pizza[] pizza) {
 		for(Pizza pi : pizza){
 			if( pi != null) {
-				System.out.println(pi.getCode()+" -> "+pi.getLibelle()+"("+pi.getPrix()+" €"+")"); 
+				System.out.println(pi);
 			}
-			
 		}
 	}
 	
-	public static int recupPizza(String code, Pizza [] pizza) {
+	private static int recupPizza(String code, Pizza [] pizza) {
 		for(int i = 0; i<pizza.length;i++) {
 			if(pizza[i] != null && pizza[i].getCode().equals(code)) {
 				return i;
@@ -92,7 +91,7 @@ public class PizzeriaAdminConsoleApp {
 		return -1;
 	}
 	
-	public static int premierNull(Pizza [] pizza) {
+	private static int premierNull(Pizza [] pizza) {
 		for(int i = 0; i<pizza.length;i++) {
 			if(pizza[i] == null) {
 				 return i;
