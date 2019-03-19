@@ -3,20 +3,14 @@ package fr.pizzeria.console;
 import java.util.Scanner;
 
 import DAO.PizzaMemDao;
-import Service.AjouterPizzasService;
-import Service.ListerPizzasService;
-import Service.ModifierPizzaService;
-import Service.SupprimerPizzaService;
+import Service.MenuFactory;
 
 
 public class PizzeriaAdminConsoleApp {
 
 	public static void main(String[] args) {
 		PizzaMemDao memPizza = new PizzaMemDao();
-		ListerPizzasService list = new ListerPizzasService();
-		AjouterPizzasService add = new AjouterPizzasService();
-		ModifierPizzaService modif = new ModifierPizzaService();
-		SupprimerPizzaService supp = new SupprimerPizzaService();
+		MenuFactory mf = new MenuFactory();
 		Scanner sc = new Scanner(System.in);
 		boolean on = true;
 		while (on == true) {
@@ -28,17 +22,16 @@ public class PizzeriaAdminConsoleApp {
 			int val = Integer.parseInt(rep);
 			switch (val) {
 			case 1:
-				list.executeUC(sc, memPizza);
+				mf.create("Lister").executeUC(sc, memPizza);
 				break;
 			case 2:
-				
-				add.executeUC(sc, memPizza);
+				mf.create("Ajouter").executeUC(sc, memPizza);
 				break;
 			case 3:
-				modif.executeUC(sc, memPizza);
+				mf.create("Modifier").executeUC(sc, memPizza);
 				break;
 			case 4:
-				supp.executeUC(sc, memPizza);
+				mf.create("Supprimer").executeUC(sc, memPizza);
 				break;
 			case 99:
 				on = false;
