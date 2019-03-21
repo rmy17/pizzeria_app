@@ -2,13 +2,15 @@ package Service;
 
 import java.util.Scanner;
 
-import DAO.PizzaMemDao;
+import DAO.IPizzaDao;
+import fr.pizzeria.exception.StockageException;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class ModifierPizzaService extends MenuService{
 
 	@Override
-	public void executeUC(Scanner scanner, PizzaMemDao memPizza) {
+	public void executeUC(Scanner scanner, IPizzaDao memPizza) throws StockageException {
 		// TODO Auto-generated method stub
 		System.out.println("Mise à jour d'une pizza");
 		ListerPizzasService l = new ListerPizzasService();
@@ -21,6 +23,9 @@ public class ModifierPizzaService extends MenuService{
 		String newNom = scanner.nextLine();
 		String newPrixStr = scanner.nextLine();
 		Double newPrix = Double.parseDouble(newPrixStr);
+		if (memPizza.pizzaExists(code)) {
+			throw new UpdatePizzaException("Le code rentré ne corresponde à aucune pizza !");
+		}
 		memPizza.updatePizza(code, new Pizza(newCode, newNom, newPrix));
 	}
 

@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 import fr.pizzeria.model.Pizza;
 
-public class PizzaMemDao implements IPizzaDao{
+public class PizzaFileDao implements IPizzaDao{
 
 	private Pizza[] pizzas;
 	
-	public PizzaMemDao() {
+	public PizzaFileDao() {
 		Pizza p1 = new Pizza(0,"PEP","Pépéroni",12.50);
 		Pizza p2 = new Pizza(1,"MAR","Margherita",14.00);
 		Pizza p3 = new Pizza(2,"REIN","La Reine",11.50);
@@ -73,6 +73,7 @@ public class PizzaMemDao implements IPizzaDao{
 				break;
 			}
 		}
+		System.out.println("Aucune pizza ne correpond à ce code !");
 		return b;
 	}
 	

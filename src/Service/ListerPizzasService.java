@@ -2,13 +2,13 @@ package Service;
 
 import java.util.Scanner;
 
-import DAO.PizzaMemDao;
+import DAO.IPizzaDao;
 import fr.pizzeria.model.Pizza;
 
 public class ListerPizzasService extends MenuService{
 
 	@Override
-	public void executeUC(Scanner scanner, PizzaMemDao memPizza) {
+	public void executeUC(Scanner scanner, IPizzaDao memPizza) {
 		System.out.println("Liste pizzas");
 		Pizza[] pizzas = memPizza.findAllPizzas();
 		affiche(pizzas);

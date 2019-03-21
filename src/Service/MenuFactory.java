@@ -16,6 +16,9 @@ public class MenuFactory {
 		else if(typeMenu.equals("Supprimer")) {
 			return new SupprimerPizzaService();
 		}
+		else if(typeMenu.equals("Sauvegarder")) {
+			return new SauvegarderPizzasService();
+		}
 		return null;
 	}
 }

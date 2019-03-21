@@ -2,12 +2,12 @@ package Service;
 
 import java.util.Scanner;
 
-import DAO.PizzaMemDao;
+import DAO.IPizzaDao;
 
 public class SupprimerPizzaService extends MenuService{
 
 	@Override
-	public void executeUC(Scanner scanner, PizzaMemDao memPizza) {
+	public void executeUC(Scanner scanner, IPizzaDao memPizza) {
 		String code;
 		do {
 			System.out.println("Suppression d'une pizza");
