@@ -5,6 +5,7 @@ import java.util.Scanner;
 import DAO.IPizzaDao;
 import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class ModifierPizzaService extends MenuService{
@@ -26,7 +27,10 @@ public class ModifierPizzaService extends MenuService{
 		if (memPizza.pizzaExists(code)) {
 			throw new UpdatePizzaException("Le code rentré ne corresponde à aucune pizza !");
 		}
-		memPizza.updatePizza(code, new Pizza(newCode, newNom, newPrix));
+		System.out.println("Veuillez saisir la nouvelle categorie !");
+		String newCat = scanner.nextLine();
+		CategoriePizza cat = CategoriePizza.valueOf(newCat);
+		memPizza.updatePizza(code, new Pizza(newCode, newNom, newPrix, cat));
 	}
 
 	

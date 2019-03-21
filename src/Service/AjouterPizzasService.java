@@ -6,6 +6,7 @@ import java.util.Scanner;
 import DAO.IPizzaDao;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.StockageException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class AjouterPizzasService extends MenuService{
@@ -30,7 +31,11 @@ public class AjouterPizzasService extends MenuService{
 		if(prix < 0 || prix < 30) {
 			throw new SavePizzaException("Donner un prix positif et inférieur à 30");
 		}
-		Pizza nouv = new Pizza(code, nom, prix);
+		
+		System.out.println("Veuillez choisir le categorie de pizza : Viande, Poisson ou Sans Viande");
+		String cat = scanner.nextLine();
+		CategoriePizza cate = CategoriePizza.valueOf(cat);
+		Pizza nouv = new Pizza(code, nom, prix,cate);
 		
 		memPizza.saveNewPizza(nouv);
 	}

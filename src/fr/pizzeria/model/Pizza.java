@@ -11,6 +11,7 @@ public class Pizza {
 	private String libelle;
 	private double prix;
 	private static int cpt = 1;
+	private CategoriePizza catPizza;
 	
 	/**
 	 * Constructor
@@ -19,12 +20,13 @@ public class Pizza {
 	 * @param libelle
 	 * @param prix
 	 */
-	public Pizza(String code, String libelle, double prix) {
+	public Pizza(String code, String libelle, double prix, CategoriePizza catPizza) {
 		cpt++;
 		this.id = cpt;
 		this.code = code;
 		this.libelle = libelle;
 		this.prix = prix;
+		this.catPizza = catPizza;
 	}
 	
 	/**
@@ -35,15 +37,16 @@ public class Pizza {
 	 * @param libelle
 	 * @param prix
 	 */
-	public Pizza(int id, String code, String libelle, double prix) {
+	public Pizza(int id, String code, String libelle, double prix, CategoriePizza catPizza) {
 		this.id = id;
 		this.code = code;
 		this.libelle = libelle;
 		this.prix = prix;
+		this.catPizza = catPizza;
 	}
 	
 	public String toString() {
-		return this.code+" -> "+this.libelle+" ("+this.prix+")";
+		return this.code+" -> "+this.libelle+" ("+this.prix+")"+" categorie de la pizza : "+this.catPizza;
 	}
 	/**
 	 * Getter
