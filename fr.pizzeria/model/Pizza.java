@@ -1,5 +1,9 @@
 package model;
 
+import java.lang.reflect.*;
+
+import utils.ToString;
+
 /**
  * 
  * @author rmy17
@@ -7,10 +11,14 @@ package model;
  */
 public class Pizza {
 	private int id;
+	@ToString(upper = true)
 	private String code;
+	@ToString(upper = true)
 	private String libelle;
+	@ToString(upper = false)
 	private double prix;
 	private static int cpt = 1;
+	@ToString(upper = true)
 	private CategoriePizza catPizza;
 	
 	/**
@@ -46,7 +54,61 @@ public class Pizza {
 	}
 	
 	public String toString() {
-		return this.code+" -> "+this.libelle+" ("+this.prix+")"+" categorie de la pizza : "+this.catPizza;
+		String chaine = "";
+		Class classe = getClass();
+		Field[] fields = classe.getDeclaredFields();
+
+		for (Field attribut: fields){
+
+			if (attribut.isAnnotationPresent(ToString.class)){
+
+				
+
+				ToString annotation = attribut.getAnnotation(ToString.class);
+
+				
+
+				boolean uppercase = annotation.upper();
+
+				String before = annotation.before();
+
+				String after = annotation.after();
+
+				
+
+				try {
+
+					chaine+=before;
+
+					if (uppercase){
+
+						chaine+=attribut.get(this).toString().toUpperCase();
+
+					}
+
+					else {
+
+						chaine+=attribut.get(this);
+
+					}
+
+					chaine+=after;
+
+					
+
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+
+					// TODO Auto-generated catch block
+
+					e.printStackTrace();
+
+				} 
+
+			}
+
+		}
+
+		return chaine;
 	}
 	/**
 	 * Getter

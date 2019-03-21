@@ -21,5 +21,16 @@ public enum CategoriePizza {
 		this.nom = nom;
 	}
 	
+	public static CategoriePizza recupCat(String name) {
+		CategoriePizza [] cat = values();
+		
+		for(CategoriePizza p : cat) {
+			if(p.getNom().equals(name)) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
 	
 }

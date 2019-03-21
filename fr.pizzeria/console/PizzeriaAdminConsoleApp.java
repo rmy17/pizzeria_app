@@ -8,6 +8,7 @@ import DAO.PizzaMemDao;
 import Service.MenuFactory;
 import exception.SavePizzaException;
 import exception.StockageException;
+import model.CategoriePizza;
 
 
 public class PizzeriaAdminConsoleApp {
@@ -17,6 +18,9 @@ public class PizzeriaAdminConsoleApp {
 		IPizzaDao filePizza = new PizzaFileDao();
 		MenuFactory mf = new MenuFactory();
 		Scanner sc = new Scanner(System.in);
+		//test
+		CategoriePizza.recupCat("Viande");
+		//test
 		boolean on = true;
 		while (on == true) {
 			System.out.println(
@@ -25,7 +29,6 @@ public class PizzeriaAdminConsoleApp {
 			System.out.println("Que voulez vous faire ? Tapez le numéro de la proposition pour faire un choix");
 			String rep = sc.nextLine();
 			int val = 0;
-			
 			try
 			{
 				val = Integer.parseInt(rep);
