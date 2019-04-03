@@ -21,6 +21,13 @@ public class Pizza {
 	@ToString(upper = true, after = "")
 	private CategoriePizza catPizza;
 	
+	public Pizza() {
+		cpt++;
+		this.code = "";
+		this.libelle = "";
+		this.prix = 0;
+		this.catPizza = CategoriePizza.POISSON ;
+	}
 	/**
 	 * Constructor
 	 * 

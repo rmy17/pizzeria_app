@@ -3,6 +3,7 @@ package console;
 import java.util.Scanner;
 
 import DAO.IPizzaDao;
+import DAO.PizzaBddDoa;
 import DAO.PizzaFileDao;
 import DAO.PizzaMemDao;
 import Service.MenuFactory;
@@ -14,8 +15,9 @@ import model.CategoriePizza;
 public class PizzeriaAdminConsoleApp {
 
 	public static void main(String[] args) {
-		IPizzaDao memPizza = new PizzaMemDao();
-		IPizzaDao filePizza = new PizzaFileDao();
+		//IPizzaDao memPizza = new PizzaMemDao();
+		//IPizzaDao filePizza = new PizzaFileDao();
+		IPizzaDao bddPizza = new PizzaBddDoa();
 		MenuFactory mf = new MenuFactory();
 		Scanner sc = new Scanner(System.in);
 		//test
@@ -23,13 +25,13 @@ public class PizzeriaAdminConsoleApp {
 		//test
 		boolean on = true;
 		while (on == true) {
+			System.out.println("Bonjour !");
 			System.out.println("1. Lister les pizza");
 			System.out.println("2. Ajouter une nouvelle pizza");
 			System.out.println("3. Mettre à jour une pizza");
 			System.out.println("4. Supprimer une pizza");
 			//System.out.println("5. Sauvegarder la liste de pizza dans un fichier");
 			System.out.println("99. Sortir");
-			System.out.println("Bonjour !");
 			System.out.println("Que voulez vous faire ? Tapez le numéro de la proposition pour faire un choix");
 			String rep = sc.nextLine();
 			int val = 0;
@@ -38,19 +40,19 @@ public class PizzeriaAdminConsoleApp {
 				val = Integer.parseInt(rep);
 				switch (val) {
 				case 1:
-					mf.create("Lister").executeUC(sc, memPizza);
+					mf.create("Lister").executeUC(sc, bddPizza);
 					break;
 				case 2:
-					mf.create("Ajouter").executeUC(sc, memPizza);
+					mf.create("Ajouter").executeUC(sc, bddPizza);
 					break;
 				case 3:
-					mf.create("Modifier").executeUC(sc, memPizza);
+					mf.create("Modifier").executeUC(sc, bddPizza);
 					break;
 				case 4:
-					mf.create("Supprimer").executeUC(sc, memPizza);
+					mf.create("Supprimer").executeUC(sc, bddPizza);
 					break;
 				case 5:
-					mf.create("Sauvegarder").executeUC(sc,filePizza);
+					mf.create("Sauvegarder").executeUC(sc,bddPizza);
 				case 99:
 					on = false;
 					System.out.println("Au revoir \u2639");

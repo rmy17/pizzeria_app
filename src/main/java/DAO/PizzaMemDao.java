@@ -1,15 +1,22 @@
 package DAO;
 
 import java.io.Serializable;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.CategoriePizza;
 import model.Pizza;
 
 public class PizzaMemDao implements IPizzaDao{
 
-	private Pizza[] pizzas;
+	private ArrayList<Pizza> pizzas;
+
 	
 	public PizzaMemDao() {
+		
+	
 		Pizza p1 = new Pizza(0,"PEP","Pépéroni",12.50,CategoriePizza.SANS_VIANDE);
 		Pizza p2 = new Pizza(1,"MAR","Margherita",14.00,CategoriePizza.SANS_VIANDE);
 		Pizza p3 = new Pizza(2,"REI","La Reine",11.50,CategoriePizza.VIANDE);
@@ -17,20 +24,18 @@ public class PizzaMemDao implements IPizzaDao{
 		Pizza p5 = new Pizza(4,"CAN","La cannibale",12.50,CategoriePizza.VIANDE);
 		Pizza p6 = new Pizza(5,"SAV","La savoyarde",13.00,CategoriePizza.VIANDE);
 		Pizza p7 = new Pizza(6,"ORI","L'orientale",13.50,CategoriePizza.VIANDE);
-		Pizza p8 = new Pizza(7,"IND","L'indienne",14.00,CategoriePizza.VIANDE); 
-		pizzas = new Pizza[100];
-		pizzas[0]=p1;pizzas[1]=p2;pizzas[2]=p3;pizzas[3]=p4;pizzas[4]=p5;pizzas[5]=p6;pizzas[6]=p7;pizzas[7]=p8;
+		Pizza p8 = new Pizza(7,"IND","L'indienne",14.00,CategoriePizza.VIANDE);
+		pizzas.add(p1);pizzas.add(p2);pizzas.add(p3);pizzas.add(p4);pizzas.add(p5);pizzas.add(p6);pizzas.add(p7);pizzas.add(p8);
 	}
 	
 	@Override
-	public Pizza[] findAllPizzas() {
+	public ArrayList<Pizza> findAllPizzas() {
 		return this.pizzas;
 	}
 
 	@Override
 	public void saveNewPizza(Pizza pizza) {
-		int idx =  premierNull(pizzas);
-		pizzas[idx]=pizza;
+		pizzas.add(pizza);
 	}
 
 	@Override
@@ -76,13 +81,5 @@ public class PizzaMemDao implements IPizzaDao{
 		}
 		return b;
 	}
-	
-	private static int premierNull(Pizza [] pizza) {
-		for(int i = 0; i<pizza.length;i++) {
-			if(pizza[i] == null) {
-				 return i;
-			}
-		}
-		return -1;
-	}
+
 }
