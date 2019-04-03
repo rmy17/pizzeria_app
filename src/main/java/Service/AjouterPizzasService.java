@@ -16,7 +16,6 @@ public class AjouterPizzasService extends MenuService{
 		System.out.println("Ajout d'une nouvelle pizza");
 		System.out.println("Veuillez saisir le code :");
 		String	code = scanner.nextLine();
-		System.out.println(code.length());
 		if (code.length() != 3) {
 			throw new SavePizzaException("Veuillez saisir un code de 3 lettres");
 		}

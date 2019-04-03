@@ -66,43 +66,25 @@ public class Pizza {
 		Field[] fields = classe.getDeclaredFields();
 
 		for (Field attribut: fields){
-
 			if (attribut.isAnnotationPresent(ToString.class)){
 
 				
 
 				ToString annotation = attribut.getAnnotation(ToString.class);
-
-				
-
 				boolean uppercase = annotation.upper();
-
 				String before = annotation.before();
-
 				String after = annotation.after();
-
 				
 
 				try {
-
 					chaine+=before;
-
 					if (uppercase){
-
 						chaine+=attribut.get(this).toString().toUpperCase();
-
 					}
-
 					else {
-
 						chaine+=attribut.get(this);
-
 					}
-
 					chaine+=after;
-
-					
-
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 
 					// TODO Auto-generated catch block
@@ -153,6 +135,10 @@ public class Pizza {
 		return this.prix;
 	}
 	
+	public CategoriePizza getCate() {
+		return this.catPizza;
+	}
+	
 	/**
 	 * Setter
 	 * 
@@ -182,4 +168,9 @@ public class Pizza {
 	public void setPrix(double newPrix) {
 		this.prix = newPrix;
 	}
+	
+	public void setCatPizza(CategoriePizza catPizza) {
+		this.catPizza = catPizza;
+	}
+	
 }
