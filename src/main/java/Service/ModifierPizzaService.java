@@ -24,8 +24,8 @@ public class ModifierPizzaService extends MenuService{
 		String newNom = scanner.nextLine();
 		String newPrixStr = scanner.nextLine();
 		Double newPrix = Double.parseDouble(newPrixStr);
-		if (memPizza.pizzaExists(code)) {
-			throw new UpdatePizzaException("Le code rentré ne corresponde à aucune pizza !");
+		if (memPizza.pizzaExists(code) == false) {
+			throw new UpdatePizzaException("Le code rentré ne correspond à aucune pizza !");
 		}
 		System.out.println("Veuillez saisir la nouvelle categorie !");
 		String newCat = scanner.nextLine();

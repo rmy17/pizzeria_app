@@ -149,7 +149,7 @@ public class PizzaBddDoa implements IPizzaDao{
 		// TODO Auto-generated method stub
 		try {
 			beginConnectJbdc();
-			st = con.prepareStatement("DELETE FROM pizzas WHERE = ?;");
+			st = con.prepareStatement("DELETE FROM pizzas WHERE CODE = ?;");
 			st.setString(1, codePizza);
 			st.executeUpdate();
 			con.commit();
@@ -174,7 +174,7 @@ public class PizzaBddDoa implements IPizzaDao{
 		Pizza pi = new Pizza();
 		try {
 			beginConnectJbdc();
-			st = con.prepareStatement("SELECT * FROM pizzas WHERE = ?;");
+			st = con.prepareStatement("SELECT * FROM pizzas WHERE CODE= ?;");
 			st.setString(1, codePizza);
 			ResultSet re = st.executeQuery();
 			
@@ -205,7 +205,7 @@ public class PizzaBddDoa implements IPizzaDao{
 		int compteur = 0;
 		beginConnectJbdc();
 		try {
-			st = con .prepareStatement("SELECT * FROM pizzas WHERE = ?;");
+			st = con .prepareStatement("SELECT * FROM pizzas WHERE CODE= ?;");
 			st.setString(1, codePizza);
 			ResultSet re = st.executeQuery();
 			while(re.next()) 
@@ -223,7 +223,7 @@ public class PizzaBddDoa implements IPizzaDao{
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new MySqlSException("Problème de vérification de la présence d'une pizza",e);
 		}
 		finally
 		{
