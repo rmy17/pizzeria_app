@@ -2,6 +2,11 @@ package model;
 
 import java.lang.reflect.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import utils.ToString;
 
 /**
@@ -9,17 +14,25 @@ import utils.ToString;
  * @author rmy17
  *
  */
+@Entity
+@Table(name = "pizzas")
 public class Pizza {
+	@Id
+	@Column(name="ID")
 	private int id;
+	@Column(name="CODE")
 	@ToString(upper = true)
 	private String code;
 	@ToString(upper = true, after = " |")
+	@Column(name="LIBELLE")
 	private String libelle;
 	@ToString(upper = false,after = "\u20AC |")
+	@Column(name="PRIX")
 	private double prix;
 	private static int cpt = 1;
 	@ToString(upper = true, after = "")
 	private CategoriePizza catPizza;
+	private String url_image;
 	
 	public Pizza() {
 		cpt++;
@@ -171,6 +184,24 @@ public class Pizza {
 	
 	public void setCatPizza(CategoriePizza catPizza) {
 		this.catPizza = catPizza;
+	}
+	/**
+	 * @return the url_image
+	 */
+	public String getUrl_image() {
+		return url_image;
+	}
+	/**
+	 * @param url_image the url_image to set
+	 */
+	public void setUrl_image(String url_image) {
+		this.url_image = url_image;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }
