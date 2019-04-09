@@ -1,10 +1,12 @@
 package model;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import utils.ToString;
@@ -18,29 +20,33 @@ import utils.ToString;
 @Table(name = "pizzas")
 public class Pizza {
 	@Id
-	@Column(name="ID")
+	@Column(name = "ID")
 	private int id;
-	@Column(name="CODE")
+	@Column(name = "CODE")
 	@ToString(upper = true)
 	private String code;
 	@ToString(upper = true, after = " |")
-	@Column(name="LIBELLE")
+	@Column(name = "LIBELLE")
 	private String libelle;
-	@ToString(upper = false,after = "\u20AC |")
-	@Column(name="PRIX")
+	@ToString(upper = false, after = "\u20AC |")
+	@Column(name = "PRIX")
 	private double prix;
 	private static int cpt = 1;
 	@ToString(upper = true, after = "")
 	private CategoriePizza catPizza;
 	private String url_image;
-	
+
+	@ManyToMany(mappedBy = "pizzas")
+	private List<Commande> commandes;
+
 	public Pizza() {
 		cpt++;
 		this.code = "";
 		this.libelle = "";
 		this.prix = 0;
-		this.catPizza = CategoriePizza.POISSON ;
+		this.catPizza = CategoriePizza.POISSON;
 	}
+
 	/**
 	 * Constructor
 	 * 
@@ -56,7 +62,7 @@ public class Pizza {
 		this.prix = prix;
 		this.catPizza = catPizza;
 	}
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -72,39 +78,35 @@ public class Pizza {
 		this.prix = prix;
 		this.catPizza = catPizza;
 	}
-	
+
 	public String toString() {
 		String chaine = "";
 		Class classe = getClass();
 		Field[] fields = classe.getDeclaredFields();
 
-		for (Field attribut: fields){
-			if (attribut.isAnnotationPresent(ToString.class)){
-
-				
+		for (Field attribut : fields) {
+			if (attribut.isAnnotationPresent(ToString.class)) {
 
 				ToString annotation = attribut.getAnnotation(ToString.class);
 				boolean uppercase = annotation.upper();
 				String before = annotation.before();
 				String after = annotation.after();
-				
 
 				try {
-					chaine+=before;
-					if (uppercase){
-						chaine+=attribut.get(this).toString().toUpperCase();
+					chaine += before;
+					if (uppercase) {
+						chaine += attribut.get(this).toString().toUpperCase();
+					} else {
+						chaine += attribut.get(this);
 					}
-					else {
-						chaine+=attribut.get(this);
-					}
-					chaine+=after;
+					chaine += after;
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 
 					// TODO Auto-generated catch block
 
 					e.printStackTrace();
 
-				} 
+				}
 
 			}
 
@@ -112,15 +114,16 @@ public class Pizza {
 
 		return chaine;
 	}
+
 	/**
 	 * Getter
 	 * 
 	 * @return id
 	 */
-	public int getId(){
+	public int getId() {
 		return this.id;
 	}
-	
+
 	/**
 	 * Getter
 	 * 
@@ -129,79 +132,79 @@ public class Pizza {
 	public String getCode() {
 		return this.code;
 	}
-	
+
 	/**
 	 * Getter
 	 * 
 	 * @return libelle
 	 */
-	public String getLibelle(){
+	public String getLibelle() {
 		return this.libelle;
 	}
-	
+
 	/**
 	 * Getter
 	 * 
 	 * @return prix
 	 */
-	public double getPrix(){
+	public double getPrix() {
 		return this.prix;
 	}
-	
+
 	public CategoriePizza getCate() {
 		return this.catPizza;
 	}
-	
+
 	/**
 	 * Setter
 	 * 
-	 * @param newCode
-	 * 			the code to set
+	 * @param newCode the code to set
 	 */
-	public void setCode(String newCode){
+	public void setCode(String newCode) {
 		this.code = newCode;
 	}
-	
-	/** 
-	 * Setter
-	 * 
-	 * @param newLibelle
-	 * 			the libelle to set
-	 */
-	public void setLibelle(String newLibelle){
-		this.libelle = newLibelle;
-	}
-	
+
 	/**
 	 * Setter
 	 * 
-	 * @param newPrix
-	 * 			the prix to set
+	 * @param newLibelle the libelle to set
+	 */
+	public void setLibelle(String newLibelle) {
+		this.libelle = newLibelle;
+	}
+
+	/**
+	 * Setter
+	 * 
+	 * @param newPrix the prix to set
 	 */
 	public void setPrix(double newPrix) {
 		this.prix = newPrix;
 	}
-	
+
 	public void setCatPizza(CategoriePizza catPizza) {
 		this.catPizza = catPizza;
 	}
+
 	/**
 	 * @return the url_image
 	 */
 	public String getUrl_image() {
 		return url_image;
 	}
+
 	/**
 	 * @param url_image the url_image to set
 	 */
 	public void setUrl_image(String url_image) {
 		this.url_image = url_image;
 	}
+
 	/**
 	 * @param id the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 }
